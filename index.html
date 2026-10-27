@@ -409,6 +409,15 @@
         }
         .btn-apple:hover { background: #333; }
 
+        .btn-download {
+            background: var(--primary);
+            color: #fff;
+            margin-bottom: 20px; /* 和下方的行事曆按鈕稍微拉開距離 */
+        }
+        .btn-download:hover { 
+            background: #b88a5d;
+            box-shadow: 0 4px 15px rgba(212, 163, 115, 0.4);
+        }
         .btn-close {
             background: transparent;
             border: none;
@@ -642,21 +651,23 @@
         </div>
     </section>
 
-    <!-- 8. 成功彈出視窗與行事曆加入選項 -->
+    <!-- 8. 成功彈出視窗與下載/行事曆選項 -->
     <div id="success-modal" class="modal-overlay">
         <div class="modal-box">
             <h3>RSVP Success</h3>
-            <p>感謝您的回覆！期待您的到來。</p>
+            <p>感謝您的回覆！<br>請下載邀請卡，並將活動加入行事曆：</p>
             
-            <!-- 行事曆按鈕 -->
-            <a href="https://addcal.io/e/wzm9ril2b4c8/google" 
-               target="_blank" class="calendar-btn btn-google">
-               加入 Google Calendar
+            <!-- ✨ 新增的下載邀請卡按鈕 ✨ -->
+            <!-- 提醒：請將 href 換成您實際邀請卡圖片的網址或檔名 -->
+            <a href="請在這裡填入您的圖片網址.jpg" download="子軒與玉貞_結婚佛前儀式邀請函.jpg" target="_blank" class="calendar-btn btn-download">
+                ⬇️ 下載電子邀請卡
             </a>
             
-            <!-- ✨ 新增的 Apple 行事曆超連結 ✨ -->
-            <a href="https://addcal.io/e/wzm9ril2b4c8/apple" 
-                target="_blank" class="calendar-btn btn-apple">
+            <!-- 行事曆按鈕 (使用您原本設定好的 calndr.link) -->
+            <a href="https://addcal.io/e/wzm9ril2b4c8/google" target="_blank" class="calendar-btn btn-google">
+                加入 Google Calendar
+            </a>
+            <a href="https://addcal.io/e/wzm9ril2b4c8/apple" target="_blank" class="calendar-btn btn-apple">
                 加入 Apple 行事曆
             </a>
             <button onclick="closeModal()" class="btn-close">關閉視窗</button>
