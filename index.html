@@ -333,6 +333,14 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(212, 163, 115, 0.4);
         }
+
+        /* ✨ 防呆：按鈕送出時的反灰鎖定狀態 ✨ */
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
         
         /* 8. 成功彈出視窗 */
         .modal-overlay {
@@ -453,22 +461,22 @@
 
             /* 2. 名字排在最上方 */
             .names { 
-                order: 1; /* 改變順序到第一位 */
+                order: 1; 
                 font-size: 2.8rem; 
                 top: 0px;
                 left: 0px;
                 margin-bottom: 2rem;
-                margin-top: -15rem; /* 稍微往上提，避開導航列 */
+                margin-top: -15rem; 
             }
 
             /* 3. 標語排在中間偏左，並加上傾斜 */
             .slogan { 
-                order: 2; /* 順序第二位 */
+                order: 2; 
                 font-size: 1.4rem; 
                 top: 135px; 
-                left: -32vw; /* 往左偏移，完美還原電腦版視覺 */
+                left: -32vw; 
                 margin-bottom: 2.5rem;
-                transform: rotate(12deg); /* 逆時針傾斜 */
+                transform: rotate(12deg); 
             }
 
             .line-1 {
@@ -488,25 +496,22 @@
             
             /* 4. 計時器排在下方 */
             .countdown-container {
-                order: 3; /* 順序第三位 */
+                order: 3; 
                 top: 250px;
                 left: 0px;
-                gap: 10px; /* 手機版間距縮小 */
+                gap: 10px; 
             }
 
-            /* 微調縮小計時器卡片內的數字與線條 */
             .cd-card { padding: 8px 12px; }
             .cd-num { font-size: 1.4rem; min-width: 30px; }
             .cd-line { height: 25px; margin: 0 10px; }
             .cd-unit { font-size: 0.75rem; }
 
-            /* 導航列字體調整 */
             .glass-nav { 
                 gap: 1rem; 
                 font-size: 0.9rem; 
             }
 
-            /* ✨ 手機版標語專屬斷行：啟動換行，隱藏逗號 */
             .mobile-break { display: block; }
             .desktop-comma { display: none; }
         }
@@ -526,7 +531,7 @@
             <!-- ✨ 在這裡加入了桌機版逗號與手機版換行符號 ✨ -->
             <div class="slogan">
                 大聲軒布<span class="desktop-comma">，</span><br class="mobile-break">我胡了！
-                <!-- 白色陰影裝飾線條 (保留您的完美定位) -->
+                <!-- 白色陰影裝飾線條 -->
                 <div class="accent-line line-1"></div>
                 <div class="accent-line line-2"></div>
             </div>
@@ -566,7 +571,6 @@
                 <strong>日期 DATE</strong><br>
                 2027年1月2日 14:30 (14:00開放進場)
             </div>
-            <!-- 6. 手機版視覺優化：地點與地址使用 no-wrap 類別 -->
             <div class="info-row">
                 <strong>地點 LOCATION</strong><br>
                 <span class="no-wrap">台灣創價學會板橋文化會館</span>
@@ -607,7 +611,8 @@
             
             <iframe name="hidden_iframe" id="hidden_iframe" class="hidden-iframe"></iframe>
             
-            <form id="rsvp-form" action="https://docs.google.com/forms/d/e/1FAIpQLScK3DDBV3PwWDKVLI1zdwqn5QIxy94TyoUfLQ9_zP68i1szMA/formResponse" method="POST" target="hidden_iframe" onsubmit="formSubmitted=true;">
+            <!-- ✨ 加入 onsubmit="handleFormSubmit()" 呼叫防呆特效 ✨ -->
+            <form id="rsvp-form" action="https://docs.google.com/forms/d/e/1FAIpQLScK3DDBV3PwWDKVLI1zdwqn5QIxy94TyoUfLQ9_zP68i1szMA/formResponse" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit()">
                 
                 <div class="form-group">
                     <label>姓名 <span>NAME</span></label>
@@ -630,7 +635,7 @@
 
                 <div class="form-group">
                     <label>與新人關係<span>RELATIONSHIP</span></label>
-                    <!-- ✨ 已修正原本的小錯字：多餘的 "/同學" 已被移除 -->
+                    <!-- ✨ 已修正原本的小錯字 -->
                     <select name="entry.2010869713" class="form-control" required>
                         <option value="" disabled selected>請選擇您是哪方的親友</option>
                         <option value="a.新郎（子軒）家人">a.新郎（子軒）家人</option>
@@ -649,7 +654,8 @@
                     <textarea name="entry.439082955" class="form-control" rows="3" placeholder="寫下您想對我們說的話..."></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">確認送出 SUBMIT</button>
+                <!-- ✨ 加入 id="submit-btn" 供 JS 鎖定按鈕 ✨ -->
+                <button type="submit" id="submit-btn" class="submit-btn">確認送出 SUBMIT</button>
             </form>
         </div>
     </section>
@@ -661,7 +667,7 @@
             <p>感謝您的回覆！<br>請下載邀請卡，並將活動加入行事曆：</p>
             
             <!-- ✨ 新增的下載邀請卡按鈕 ✨ -->
-            <!-- 提醒：請將 invitation.jpg 圖片檔案上傳到同一個 GitHub 資料夾中 -->
+            <!-- 提醒：請記得將邀請卡圖片命名為 invitation.jpg 上傳到同一個 GitHub 資料夾中 -->
             <a href="invitation.jpg" download="子軒與玉貞_結婚佛前儀式邀請函.jpg" target="_blank" class="calendar-btn btn-download">
                 ⬇️ 下載電子邀請卡
             </a>
@@ -672,7 +678,6 @@
                 加入 Google Calendar
             </a>
             
-            <!-- ✨ 新增的 Apple 行事曆超連結 ✨ -->
             <a href="https://addcal.io/e/wzm9ril2b4c8/apple" 
                 target="_blank" class="calendar-btn btn-apple">
                 加入 Apple 行事曆
@@ -685,11 +690,27 @@
     <script>
         let formSubmitted = false;
 
+        // ✨ 新增：按下送出瞬間執行的防呆動作 ✨
+        function handleFormSubmit() {
+            formSubmitted = true;
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true; // 鎖定按鈕防止連點
+            btn.innerHTML = '送出中... 請稍候 ⏳'; // 改變文字安撫等待時間
+        }
+
         function handleIframeLoad() {
             if (formSubmitted) {
+                // 1. 顯示成功彈出視窗
                 document.getElementById('success-modal').classList.add('show');
+                
+                // 2. 清空表單內容
                 document.getElementById('rsvp-form').reset();
                 formSubmitted = false;
+                
+                // ✨ 3. 將按鈕恢復原狀 (讓親友可以幫家人再填一份) ✨
+                const btn = document.getElementById('submit-btn');
+                btn.disabled = false;
+                btn.innerHTML = '確認送出 SUBMIT';
             }
         }
 
